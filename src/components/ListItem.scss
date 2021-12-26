@@ -13,9 +13,10 @@
   .item-handles {
     flex-shrink: 0;
     margin-left: auto;
+    transform: scale(0.78);
+    transform-origin: right center;
     .item-btn {
-      transform: scale(0.8);
-      transform-origin: center;
+        margin-left: 6px;
     }
   }
 }
