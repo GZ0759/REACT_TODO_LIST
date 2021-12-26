@@ -1,0 +1,21 @@
+.item {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  .item-switch {
+    width: 70px;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .item-content {
+    flex: 1;
+  }
+  .item-handles {
+    flex-shrink: 0;
+    margin-left: auto;
+    .item-btn {
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+  }
+}
