@@ -3,12 +3,15 @@ import { Row, Col, List } from 'antd';
 import ListHead from './components/ListHead';
 import ListInput from './components/ListInput';
 import ListItem from './components/ListItem';
+import ViewModal from './components/ViewModal';
 import { TODO_LIST } from './constants/index';
 import './App.scss';
 
 function App() {
-  const [showInput, setShowInput] = useState(true);
-  const [list, setList] = useState([]);
+  const [showInput, setShowInput] = useState(true); // 输入框
+  const [modalVisible, setModalVisible] = useState(false); // 模态框
+  const [list, setList] = useState([]); // 待办列表
+  const [itemData, setItemData] = useState({}); // 待办列表
   // 打开输入框
   const openInput = () => {
     setShowInput(!showInput);
@@ -35,6 +38,13 @@ function App() {
     localStorage.setItem(TODO_LIST, JSON.stringify(list));
   }, [list]);
 
+  // 打开选择待办
+  const showModal = useCallback((id) => {
+    const item = list.find((item) => item.id === id);
+    setItemData(item);
+    setModalVisible(true)
+  }, [list]);
+
   return (
     <div className="App">
       <Row>
@@ -48,7 +58,7 @@ function App() {
               locale={{ emptyText: '这里是空空如也' }}
               renderItem={(item) => (
                 <List.Item key={item.id}>
-                  <ListItem data={item} />
+                  <ListItem data={item} showModal={showModal} />
                 </List.Item>
               )}
             />
@@ -56,6 +66,11 @@ function App() {
         </Col>
         <Col xs={0} sm={0} md={4} lg={6} xl={7}></Col>
       </Row>
+      <ViewModal
+        show={modalVisible}
+        content={itemData}
+        closeModal={() => setModalVisible(false)}
+      />
     </div>
   );
 }
