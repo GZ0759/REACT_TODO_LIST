@@ -4,5 +4,10 @@
   button {
     background: #1a374d;
     border-color: #1a374d;
+    &:hover,
+    &:focus {
+      background: #6998ab;
+      border-color: #6998ab;
+    }
   }
 }
