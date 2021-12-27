@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  overflow: hidden;
   .item-switch {
     width: 70px;
     margin-right: 10px;
@@ -9,14 +10,20 @@
   }
   .item-content {
     flex: 1;
+    overflow: hidden;
   }
   .item-handles {
     flex-shrink: 0;
     margin-left: auto;
-    transform: scale(0.78);
-    transform-origin: right center;
     .item-btn {
-        margin-left: 6px;
+      transform: scale(0.78);
+      transform-origin: right center;
+      &.item-btn:nth-child(1) {
+        transform: scale(0.78) translateX(10px * 2);
+      }
+      &.item-btn:nth-child(2) {
+        transform: scale(0.78) translateX(10px);
+      }
     }
   }
 }
