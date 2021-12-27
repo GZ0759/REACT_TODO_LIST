@@ -7,6 +7,9 @@
     width: 70px;
     margin-right: 10px;
     flex-shrink: 0;
+    &:focus {
+      background: #1a374d;
+    }
     &.ant-switch-checked {
       background: #1a374d;
     }

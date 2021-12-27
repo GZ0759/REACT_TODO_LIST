@@ -7,11 +7,13 @@ const ListHead = (props) => {
   return (
     <div className="header">
       <h1 className="header-label">事件待办</h1>
-      {isInputShow ? (
-        <CloseCircleOutlined style={{ fontSize: '22px' }} onClick={openInput} />
-      ) : (
-        <PlusCircleOutlined style={{ fontSize: '22px' }} onClick={openInput} />
-      )}
+      <button className="header-btn" onClick={openInput}>
+        {isInputShow ? (
+          <CloseCircleOutlined style={{ fontSize: '22px' }} />
+        ) : (
+          <PlusCircleOutlined style={{ fontSize: '22px' }} />
+        )}
+      </button>
     </div>
   );
 };
