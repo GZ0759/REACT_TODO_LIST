@@ -1,16 +1,19 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Row, Col, List } from 'antd';
 import ListHead from './components/ListHead';
 import ListInput from './components/ListInput';
 import ListItem from './components/ListItem';
+import { TODO_LIST } from './constants/index';
 import './App.scss';
 
 function App() {
   const [showInput, setShowInput] = useState(true);
   const [list, setList] = useState([]);
+  // 打开输入框
   const openInput = () => {
     setShowInput(!showInput);
   };
+  // 添加新增内容
   const addItem = useCallback((value) => {
     const item = {
       id: new Date().getTime(),
@@ -20,6 +23,17 @@ function App() {
     setList((list) => [...list, item]);
     setShowInput(false);
   }, []);
+
+  // 获取数据
+  useEffect(() => {
+    let todoList = JSON.parse(localStorage.getItem(TODO_LIST)) || [];
+    setList(todoList);
+  }, []);
+
+  // 更新数据
+  useEffect(() => {
+    localStorage.setItem(TODO_LIST, JSON.stringify(list));
+  }, [list]);
 
   return (
     <div className="App">
