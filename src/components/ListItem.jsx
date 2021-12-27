@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Button, Typography } from 'antd';
 
-import './ListItem.scss';
+import './ListItem.less';
 
 const ListItem = (props) => {
   const { data } = props;

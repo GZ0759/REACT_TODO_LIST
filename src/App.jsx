@@ -6,7 +6,7 @@ import ListItem from './components/ListItem';
 import './App.scss';
 
 function App() {
-  const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState(true);
   const [list, setList] = useState([]);
   const openInput = () => {
     setShowInput(!showInput);
@@ -26,7 +26,7 @@ function App() {
       <Row>
         <Col xs={0} sm={0} md={4} lg={6} xl={7}></Col>
         <Col xs={24} sm={24} md={16} lg={12} xl={10}>
-          <ListHead openInput={openInput}></ListHead>
+          <ListHead isInputShow={showInput} openInput={openInput}></ListHead>
           <ListInput isInputShow={showInput} addItem={addItem}></ListInput>
           <div className="content">
             <List
