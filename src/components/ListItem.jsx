@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Switch, Button, Typography } from 'antd';
 
 import './ListItem.scss';
 
 const ListItem = (props) => {
-  const { data, showModal } = props;
+  const { data, showModal, editModal } = props;
   return (
     <div className="item">
       <Switch
@@ -29,7 +29,7 @@ const ListItem = (props) => {
           查看
         </Button>
         <Button
-          onClick={() => showModal(data.id)}
+          onClick={() => editModal(data.id)}
           className="item-btn"
           type="primary"
           shape="round"

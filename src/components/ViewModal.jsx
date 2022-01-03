@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button } from 'antd';
 import './ViewModal.scss';
 
@@ -7,7 +7,7 @@ const ViewModal = (props) => {
 
   return (
     <>
-      <Modal title="查看待办事项" visible={show} footer={null}>
+      <Modal title="查看待办" visible={show} footer={null} onCancel={closeModal}>
         <p>
           <span>时间：</span>
           <span>{content.id}</span>

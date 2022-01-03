@@ -4,12 +4,14 @@ import ListHead from './components/ListHead';
 import ListInput from './components/ListInput';
 import ListItem from './components/ListItem';
 import ViewModal from './components/ViewModal';
+import EditModal from './components/EditModal';
 import { TODO_LIST } from './constants/index';
 import './App.scss';
 
 function App() {
   const [showInput, setShowInput] = useState(true); // 输入框
   const [modalVisible, setModalVisible] = useState(false); // 模态框
+  const [modalEditVisible, setModalEditVisible] = useState(false); // 编辑模态框
   const [list, setList] = useState([]); // 待办列表
   const [itemData, setItemData] = useState({}); // 待办列表
   // 打开输入框
@@ -38,11 +40,18 @@ function App() {
     localStorage.setItem(TODO_LIST, JSON.stringify(list));
   }, [list]);
 
-  // 打开选择待办
+  // 打开选中待办
   const showModal = useCallback((id) => {
     const item = list.find((item) => item.id === id);
     setItemData(item);
     setModalVisible(true)
+  }, [list]);
+
+  // 编辑选中待办
+  const editModal = useCallback((id) => {
+    const item = list.find((item) => item.id === id);
+    setItemData(item);
+    setModalEditVisible(true)
   }, [list]);
 
   return (
@@ -58,7 +67,7 @@ function App() {
               locale={{ emptyText: '这里是空空如也' }}
               renderItem={(item) => (
                 <List.Item key={item.id}>
-                  <ListItem data={item} showModal={showModal} />
+                  <ListItem data={item} showModal={showModal} editModal={editModal} />
                 </List.Item>
               )}
             />
@@ -70,6 +79,11 @@ function App() {
         show={modalVisible}
         content={itemData}
         closeModal={() => setModalVisible(false)}
+      />
+      <EditModal
+        show={modalEditVisible}
+        content={itemData}
+        closeModal={() => setModalEditVisible(false)}
       />
     </div>
   );
