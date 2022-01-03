@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Input } from 'antd';
-
 import './ListInput.scss';
-
 const { Search } = Input;
+
 const ListInput = (props) => {
   const { isInputShow, addItem } = props;
   const onSearch = (value) => {

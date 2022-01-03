@@ -4,17 +4,30 @@ import { Switch, Button, Typography } from 'antd';
 import './ListItem.scss';
 
 const ListItem = (props) => {
-  const { data, showModal, editModal } = props;
+  const { data, showModal, editModal, deleteModal, submitItem } = props;
+  const onChangeComplete = () => {
+    const { completed, id, content } = data;
+    submitItem({
+      content,
+      id,
+      completed: !completed,
+    });
+  };
   return (
     <div className="item">
       <Switch
         className="item-switch"
         checkedChildren="完成"
         unCheckedChildren="未完成"
-        defaultChecked={data.completed}
+        checked={data.completed}
+        onChange={onChangeComplete}
       />
       <div className="item-content">
-        <Typography.Text ellipsis mark={!data.completed} delete={data.completed}>
+        <Typography.Text
+          ellipsis
+          mark={!data.completed}
+          delete={data.completed}
+        >
           {data.content}
         </Typography.Text>
       </div>
@@ -43,7 +56,7 @@ const ListItem = (props) => {
           danger
           shape="round"
           size="small"
-          onClick={() => showModal(data.id)}
+          onClick={() => deleteModal(data.id)}
         >
           删除
         </Button>

@@ -26,7 +26,7 @@ function App() {
       completed: false,
     };
     setList((list) => [...list, item]);
-    setShowInput(false);
+    // setShowInput(false);
   }, []);
   // 修改内容
   const updateItem = useCallback(({ content, completed, id }) => {
@@ -70,6 +70,10 @@ function App() {
     [list]
   );
 
+  const deleteModal = useCallback((id) => {
+    setList((list) => list.filter((item) => item.id !== id));
+  }, []);
+
   return (
     <div className="App">
       <Row>
@@ -87,6 +91,8 @@ function App() {
                     data={item}
                     showModal={showModal}
                     editModal={editModal}
+                    deleteModal={deleteModal}
+                    submitItem={updateItem}
                   />
                 </List.Item>
               )}

@@ -12,7 +12,6 @@ const EditModal = (props) => {
 
   useEffect(() => {
     const { content, completed } = props.content;
-    console.log(props.content);
     setInputValue(content);
     setSwtichValue(completed);
   }, [props.content]);
