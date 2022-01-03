@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, Input, Switch } from 'antd';
 import { timejs } from '../utils/index';
 import './EditModal.scss';
@@ -7,8 +7,16 @@ const { TextArea } = Input;
 
 const EditModal = (props) => {
   const { show, content, closeModal, submitItem } = props;
-  const [inputValue, setInputValue] = useState(content.content);
-  const [swtichValue, setSwtichValue] = useState(content.completed);
+  const [inputValue, setInputValue] = useState('');
+  const [swtichValue, setSwtichValue] = useState(false);
+
+  useEffect(() => {
+    const { content, completed } = props.content;
+    console.log(props.content);
+    setInputValue(content);
+    setSwtichValue(completed);
+  }, [props.content]);
+
   const onSubmit = () => {
     submitItem({ content: inputValue, completed: swtichValue, id: content.id });
   };
@@ -29,14 +37,14 @@ const EditModal = (props) => {
           <TextArea
             className="area"
             rows={4}
-            defaultValue={inputValue}
+            value={inputValue}
             onChange={(e) => setInputValue(e.currentTarget.value)}
           ></TextArea>
         </p>
         <p>
           <span>状态：</span>
           <Switch
-            defaultChecked={swtichValue}
+            checked={swtichValue}
             onChange={(e) => setSwtichValue(e)}
           />
         </p>
