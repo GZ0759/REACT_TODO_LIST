@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Input, Switch } from 'antd';
+import { timejs } from '../utils/index';
 import './EditModal.scss';
 
 const { TextArea } = Input;
@@ -21,7 +22,7 @@ const EditModal = (props) => {
       >
         <p>
           <span>时间：</span>
-          <span>{content.id}</span>
+          <span>{timejs(content.id)}</span>
         </p>
         <p>
           <span className="area-label">内容：</span>

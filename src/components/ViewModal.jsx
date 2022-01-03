@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
+import { timejs } from '../utils/index';
 import './ViewModal.scss';
 
 const ViewModal = (props) => {
@@ -7,10 +8,15 @@ const ViewModal = (props) => {
 
   return (
     <>
-      <Modal title="查看待办" visible={show} footer={null} onCancel={closeModal}>
+      <Modal
+        title="查看待办"
+        visible={show}
+        footer={null}
+        onCancel={closeModal}
+      >
         <p>
           <span>时间：</span>
-          <span>{content.id}</span>
+          <span>{timejs(content.id)}</span>
         </p>
         <p>
           <span>内容：</span>
