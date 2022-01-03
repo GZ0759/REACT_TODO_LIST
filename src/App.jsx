@@ -28,6 +28,16 @@ function App() {
     setList((list) => [...list, item]);
     setShowInput(false);
   }, []);
+  // 修改内容
+  const updateItem = useCallback(({ content, completed, id }) => {
+    const add = {
+      id: new Date().getTime(),
+      content,
+      completed,
+    };
+    setList((list) => list.map((item) => (item.id === id ? add : item)));
+    setModalEditVisible(false);
+  }, []);
 
   // 获取数据
   useEffect(() => {
@@ -41,18 +51,24 @@ function App() {
   }, [list]);
 
   // 打开选中待办
-  const showModal = useCallback((id) => {
-    const item = list.find((item) => item.id === id);
-    setItemData(item);
-    setModalVisible(true)
-  }, [list]);
+  const showModal = useCallback(
+    (id) => {
+      const item = list.find((item) => item.id === id);
+      setItemData(item);
+      setModalVisible(true);
+    },
+    [list]
+  );
 
   // 编辑选中待办
-  const editModal = useCallback((id) => {
-    const item = list.find((item) => item.id === id);
-    setItemData(item);
-    setModalEditVisible(true)
-  }, [list]);
+  const editModal = useCallback(
+    (id) => {
+      const item = list.find((item) => item.id === id);
+      setItemData(item);
+      setModalEditVisible(true);
+    },
+    [list]
+  );
 
   return (
     <div className="App">
@@ -67,7 +83,11 @@ function App() {
               locale={{ emptyText: '这里是空空如也' }}
               renderItem={(item) => (
                 <List.Item key={item.id}>
-                  <ListItem data={item} showModal={showModal} editModal={editModal} />
+                  <ListItem
+                    data={item}
+                    showModal={showModal}
+                    editModal={editModal}
+                  />
                 </List.Item>
               )}
             />
@@ -84,6 +104,7 @@ function App() {
         show={modalEditVisible}
         content={itemData}
         closeModal={() => setModalEditVisible(false)}
+        submitItem={updateItem}
       />
     </div>
   );

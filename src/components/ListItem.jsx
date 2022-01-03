@@ -11,39 +11,39 @@ const ListItem = (props) => {
         className="item-switch"
         checkedChildren="完成"
         unCheckedChildren="未完成"
-        defaultChecked={false}
+        defaultChecked={data.completed}
       />
       <div className="item-content">
-        <Typography.Text ellipsis mark>
+        <Typography.Text ellipsis mark={!data.completed} delete={data.completed}>
           {data.content}
         </Typography.Text>
       </div>
       <div className="item-handles">
         <Button
-          onClick={() => showModal(data.id)}
           className="item-btn"
           type="primary"
           shape="round"
           size="small"
+          onClick={() => showModal(data.id)}
         >
           查看
         </Button>
         <Button
-          onClick={() => editModal(data.id)}
           className="item-btn"
           type="primary"
           shape="round"
           size="small"
+          onClick={() => editModal(data.id)}
         >
           编辑
         </Button>
         <Button
-          onClick={() => showModal(data.id)}
           className="item-btn"
           type="primary"
           danger
           shape="round"
           size="small"
+          onClick={() => showModal(data.id)}
         >
           删除
         </Button>
